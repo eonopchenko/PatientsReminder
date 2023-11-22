@@ -1,0 +1,52 @@
+﻿@model List<AzureAppDbHosting.Models.PatientViewModel>
+
+@{
+	ViewData["Title"] = "Patient Details";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<hr/>
+
+<form>
+	<table class="table table-responsive table-hover">
+		<thead>
+			<tr class="table-active">
+				<th>Id</th>
+				<th>Name</th>
+				<th>Gender</th>
+				<th>Phone</th>
+				<th>Send notification</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (Model != null && Model.Any())
+			{
+				@foreach (var patient in Model)
+				{
+					<tr>
+						<td>@patient.Id</td>
+						<td>@patient.FullName</td>
+						<td>@patient.Gender</td>
+						<td>@patient.Phone</td>
+						<td>
+						<input type="button"
+							   value="Send SMS"
+								   onclick="location.href = '@Url.Action("SendSms", "Patients", new { phone = @patient.Phone })';" />
+						</td>
+					</tr>
+				}
+			}
+			else
+			{
+				<tr>
+					<td colspan="4">
+						<td>
+							No Patients
+						</td>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</form>
