@@ -16,6 +16,7 @@
 				<th>Name</th>
 				<th>Gender</th>
 				<th>Phone</th>
+				<th>Notification</th>
 				<th>Send notification</th>
 			</tr>
 		</thead>
@@ -28,11 +29,15 @@
 						<td>@patient.Id</td>
 						<td>@patient.FullName</td>
 						<td>@patient.Gender</td>
-						<td>@patient.Phone</td>
+						<td><input type="text" id="phone-@patient.Id" value="@patient.Phone" readonly></td>
 						<td>
-						<input type="button"
-							   value="Send SMS"
-								   onclick="location.href = '@Url.Action("SendSms", "Patients", new { phone = @patient.Phone })';" />
+							<input type="text" id="notification-@patient.Id"/>
+						</td>
+						<td>
+@*  	 						<input type="button"
+								value="Send SMS"
+					onclick="location.href = '@Url.Action("SendSms", "Patients", new { phone = @patient.Phone })';" /> *@
+							<input type="button" class="send" id="send-button-@patient.Id" value="Send SMS"/>
 						</td>
 					</tr>
 				}
@@ -50,3 +55,7 @@
 		</tbody>
 	</table>
 </form>
+
+@section scripts {
+	<script src="~/js/notifications.js"></script>
+}

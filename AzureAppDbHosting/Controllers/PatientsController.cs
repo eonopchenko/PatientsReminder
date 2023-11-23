@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AzureAppDbHosting.Models;
 using AzureAppDbHosting.Services;
+using System.IO;
 
 namespace AzureAppDbHosting.Controllers
 {
@@ -57,19 +58,33 @@ namespace AzureAppDbHosting.Controllers
             return View(patientList);
         }
 
-        public IActionResult SendSms(string phone)
-        {
-            try
+        public IActionResult SendSms(string phone, string notification)
+		{
+            Action<string> appendServerLog = delegate (string log)
             {
-                _smsService.SendSms(phone);
+                using (StreamWriter writetext = new StreamWriter("server-log.txt", append: true))
+                {
+                    writetext.WriteLine(log);
+                }
+            };
+
+			try
+            {
+                string response = _smsService.SendSms(phone, notification);
+				appendServerLog(phone + " " + notification + " " + response);
 			}
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                appendServerLog(phone + " " + notification + " " + ex.ToString());
+				Console.WriteLine(ex.ToString());
                 return NotFound();
 			}
             return Ok();
         }
+
+        static void AppendServerLog(string log)
+        {
+		}
 
         //// GET: api/Patients/5
         //[HttpGet("{id}")]

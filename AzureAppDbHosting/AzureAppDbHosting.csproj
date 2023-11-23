@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\notifications.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Communication.PhoneNumbers" Version="1.1.0" />
     <PackageReference Include="Azure.Communication.Sms" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />

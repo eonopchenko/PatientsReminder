@@ -14,15 +14,17 @@ namespace AzureAppDbHosting.Services
 			smsClient = new SmsClient(connectionString);
 		}
 
-		public void SendSms(string phone)
+		public string SendSms(string phone, string notification)
 		{
 			SmsSendResult sendResult = smsClient.Send(
 				from: "+64123456789",
 				to: phone,
-				message: "Appointment reminder"
+				message: notification
 			);
 
 			Console.WriteLine($"Sms id: {sendResult.MessageId}");
+
+			return sendResult.ToString();
 		}
 
 		private SmsClient? smsClient;

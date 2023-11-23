@@ -22,5 +22,8 @@ namespace AzureAppDbHosting.Models
 
         [DisplayName("Phone")]
         public string? Phone { get; set; }
+
+		[DisplayName("Notification")]
+		public string? Notification { get; set; }
     }
 }

@@ -28,6 +28,7 @@ public partial class MySqlDatabaseContext : DbContext
             entity.Property(e => e.Gender).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
 			entity.Property(e => e.Phone).HasMaxLength(50);
+			entity.Property(e => e.Notification).HasMaxLength(50);
 		});
 
         OnModelCreatingPartial(modelBuilder);
